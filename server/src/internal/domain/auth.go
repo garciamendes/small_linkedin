@@ -1,4 +1,4 @@
-package models
+package domain
 
 import (
 	"github.com/google/uuid"
@@ -7,13 +7,18 @@ import (
 
 type Auth struct {
 	ID       uuid.UUID `json:"id" gorm:"type:uuid;primaryKey"`
-	Email    string    `json:"email" gorm:"not null;unique;size:255"`
+	Email    string    `json:"email" gorm:"not null;unique;"`
 	Password string    `json:"-" gorm:"not null"`
-	UserID   uuid.UUID `json:"user_id" gorm:"type:uuid;not null;uniqueIndex"`
+	UserID   uuid.UUID `json:"user_id" gorm:"type:uuid;uniqueIndex"`
 	*Timestamp
 }
 
 func (n *Auth) BeforeCreate(tx *gorm.DB) (err error) {
 	n.ID = uuid.New()
 	return
+}
+
+type AuthRepository interface {
+	Create(auth *Auth) error
+	GetByEmail(email string) (*Auth, error)
 }

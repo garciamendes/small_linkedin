@@ -1,4 +1,4 @@
-package models
+package domain
 
 import (
 	"github.com/google/uuid"
@@ -7,7 +7,7 @@ import (
 
 type User struct {
 	ID       uuid.UUID `json:"id" gorm:"type:uuid;primaryKey"`
-	Name     string    `json:"name" gorm:"not null;size:100"`
+	Name     string    `json:"name,omitempty" gorm:"null;"`
 	Headline string    `json:"headline,omitempty" gorm:"size:200"`
 	*Timestamp
 }
@@ -15,4 +15,9 @@ type User struct {
 func (n *User) BeforeCreate(tx *gorm.DB) (err error) {
 	n.ID = uuid.New()
 	return
+}
+
+type UserRepository interface {
+	Create(user *User) error
+	GetById(id uuid.UUID) (*User, error)
 }
