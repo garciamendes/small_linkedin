@@ -13,11 +13,26 @@ func AuthRepository(db *gorm.DB) domain.AuthRepository {
 	return &authRepo{db}
 }
 
-func (a *authRepo) Create(auth *domain.Auth) error {
-	if err := a.db.Create(auth).Error; err != nil {
+func (a *authRepo) Create(authData *domain.Auth) error {
+	a.db.Begin()
+
+	var user domain.User
+	if err := a.db.Create(&user).Error; err != nil {
+		a.db.Rollback()
 		return err
 	}
 
+	var auth = &domain.Auth{
+		Email:    authData.Email,
+		UserID:   user.ID,
+		Password: authData.Password,
+	}
+	if err := a.db.Create(auth).Error; err != nil {
+		a.db.Rollback()
+		return err
+	}
+
+	a.db.Commit()
 	return nil
 }
 

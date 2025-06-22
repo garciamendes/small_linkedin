@@ -1,5 +1,5 @@
 services:
-  todo-go:
+  small_linkedin:
     container_name: link-go
     image: "bitnami/postgresql:15"
     environment:
