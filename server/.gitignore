@@ -21,4 +21,3 @@ go.sum
 .env
 
 tmp
-cmd
