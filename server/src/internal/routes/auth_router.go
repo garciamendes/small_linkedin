@@ -10,11 +10,12 @@ import (
 
 func AuthRoutes(router *gin.RouterGroup, db *gorm.DB) {
 	authRepo := repositories.AuthRepository(db)
-	userUC := usecase.NewAuthUseCase(authRepo)
-	handlers := handlers.NewAuthController(userUC)
+	authUC := usecase.NewAuthUseCase(authRepo)
+	handlers := handlers.NewAuthController(authUC)
 
-	auth := router.Group("/auth")
+	route := router.Group("/auth")
 	{
-		auth.POST("/register", handlers.Register)
+		route.POST("/register", handlers.Register)
+		route.POST("/login", handlers.Login)
 	}
 }

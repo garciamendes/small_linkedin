@@ -45,6 +45,7 @@ func main() {
 	apiGroup := router.Group("/api")
 
 	routes.AuthRoutes(apiGroup, DB)
+	routes.UserRouter(apiGroup, DB)
 
 	router.Run(":8080")
 }

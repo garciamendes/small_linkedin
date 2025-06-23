@@ -18,6 +18,5 @@ func (n *User) BeforeCreate(tx *gorm.DB) (err error) {
 }
 
 type UserRepository interface {
-	Create(user *User) error
 	GetById(id uuid.UUID) (*User, error)
 }

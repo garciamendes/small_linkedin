@@ -21,4 +21,5 @@ func (n *Auth) BeforeCreate(tx *gorm.DB) (err error) {
 type AuthRepository interface {
 	Create(auth *Auth) error
 	GetByEmail(email string) (*Auth, error)
+	GetByUserId(userId uuid.UUID) (*Auth, error)
 }

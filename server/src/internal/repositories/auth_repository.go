@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"github.com/garciamendes/small_linkedin/src/internal/domain"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -40,6 +41,16 @@ func (a *authRepo) GetByEmail(email string) (*domain.Auth, error) {
 	var auth domain.Auth
 
 	if err := a.db.Where("email = ?", email).First(&auth).Error; err != nil {
+		return nil, err
+	}
+
+	return &auth, nil
+}
+
+func (a *authRepo) GetByUserId(userID uuid.UUID) (*domain.Auth, error) {
+	var auth domain.Auth
+
+	if err := a.db.Where("user_id = ?", userID).First(&auth).Error; err != nil {
 		return nil, err
 	}
 

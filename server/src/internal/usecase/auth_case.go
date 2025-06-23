@@ -46,7 +46,25 @@ func (useCase *AuthUseCase) Create(data *domain.Auth) error {
 	return nil
 }
 
-func (u *AuthUseCase) GetByEmail(email string) (*domain.Auth, error) {
-	// TODO!: Adicionar toda tratativas
-	return u.authRepo.GetByEmail(email)
+func (useCase *AuthUseCase) Login(data *domain.Auth) (string, error) {
+	account, err := useCase.authRepo.GetByEmail(data.Email)
+
+	if err != nil {
+		return "", fmt.Errorf("invalid credentials")
+	}
+
+	if account == nil {
+		return "", fmt.Errorf("invalid credentials")
+	}
+
+	if !utils.CheckPasswordHash(data.Password, account.Password) {
+		return "", fmt.Errorf("invalid credentials")
+	}
+
+	token, err := utils.GenerateJWT(account.UserID)
+	if err != nil {
+		return "", fmt.Errorf("system error")
+	}
+
+	return token, nil
 }

@@ -14,14 +14,6 @@ func UserRepository(db *gorm.DB) domain.UserRepository {
 	return &userRepo{db}
 }
 
-func (u *userRepo) Create(user *domain.User) error {
-	if err := u.db.Create(user).Error; err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (u *userRepo) GetById(id uuid.UUID) (*domain.User, error) {
 	var user domain.User
 

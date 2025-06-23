@@ -35,3 +35,24 @@ func (authHandler *AuthHandler) Register(c *gin.Context) {
 
 	c.Status(http.StatusCreated)
 }
+
+func (authHandler *AuthHandler) Login(c *gin.Context) {
+	var body dtos.LoginUserDTO
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"message": "Invalid request body"})
+		return
+	}
+
+	var data = domain.Auth{
+		Email:    body.Email,
+		Password: body.Password,
+	}
+
+	token, err := authHandler.authUseCase.Login(&data)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"message": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"token": token})
+}
