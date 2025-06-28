@@ -3,6 +3,7 @@ import { AuthComponent } from "./features/auth/auth.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { FeedComponent } from "./feed/feed.component";
 import { authGuard } from "./core/guards/auth.guard";
+import { RootLayoutComponent } from "./root-layout/root-layout.component";
 
 export const routes: Routes = [
   {
@@ -15,9 +16,15 @@ export const routes: Routes = [
     component: AuthComponent,
   },
   {
-    path: "feed",
-    component: FeedComponent,
+    path: "",
+    component: RootLayoutComponent,
     canActivate: [authGuard],
+    children: [
+      {
+        path: "feed",
+        component: FeedComponent,
+      },
+    ],
   },
   { path: "**", component: NotFoundComponent },
 ];
