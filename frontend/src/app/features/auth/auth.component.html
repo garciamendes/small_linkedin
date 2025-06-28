@@ -1,0 +1,22 @@
+<div class="h-full w-full flex justify-center items-center">
+  <form [formGroup]="loginForm" (submit)="onSubmit()"
+    class="flex flex-col w-[350px] h-2/5 p-2.5 bg-gray-700 rounded-lg">
+    <h1 class="text-2xl text-blue-500">Entrar</h1>
+
+    <div class="flex flex-1 flex-col gap-8 mt-4">
+      <input formControlName="email"
+        class="border border-slate-300 p-2 rounded-md text-slate-200 placeholder:text-slate-200/65 outline-0"
+        placeholder="Email" type="text" name="email" id="email">
+
+      <div class="flex flex-col gap-1">
+        <input formControlName="password"
+          class="border border-slate-300 p-2 rounded-md text-slate-200 placeholder:text-slate-200/65 outline-0"
+          placeholder="Senha" type="password" name="password" id="password">
+        <span class="cursor-pointer text-blue-500 transition-colors duration-300 hover:text-blue-500/80">Esqueceu a
+          senha?</span>
+      </div>
+
+      <button class="cursor-pointer p-2 bg-blue-600 text-slate-200 rounded-md">Entrar</button>
+    </div>
+  </form>
+</div>
