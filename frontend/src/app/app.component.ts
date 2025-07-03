@@ -4,10 +4,11 @@ import { NgxSonnerToaster } from "ngx-sonner";
 import { AuthService } from "./core/services/auth.service";
 import { filter } from "rxjs";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { LucideAngularModule } from "lucide-angular";
 
 @Component({
   selector: "app-root",
-  imports: [RouterOutlet, NgxSonnerToaster],
+  imports: [RouterOutlet, NgxSonnerToaster, LucideAngularModule],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })

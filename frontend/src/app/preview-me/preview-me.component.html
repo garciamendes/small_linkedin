@@ -1,1 +1,33 @@
-<p>preview-me works!</p>
+<aside class="relative w-[250px] flex flex-col h-auto overflow-hidden rounded-xl bg-zinc-900">
+  <a class="h-[56px] w-full">
+    <img class="h-full w-full object-cover" src="{{previewThumb}}" alt="thumb">
+  </a>
+
+  <div class="flex-1 flex flex-col px-4 -mt-7">
+    <a class="">
+      <img class="border border-slate-200 rounded-full h-[75px] w-[75px]" src="{{avatar}}" alt="me">
+    </a>
+
+    <div class="flex justify-between w-full mt-2 gap-2">
+      <h3 class="text-xl text-nowrap overflow-hidden text-ellipsis">Aron Matheus Garcia Mendes</h3>
+
+      <div class="flex invisible">
+        <lucide-angular [img]="(this.ShieldCheck)"></lucide-angular>
+      </div>
+    </div>
+
+    <div class="flex flex-col mt-1">
+      <p class="text-sm overflow-hidden text-ellipsis line-clamp-2 text-slate-200/80">Desenvolvedor | ReactJs | NextJs |
+        Typescript |
+        NodeJS | Python |
+        Django | Software Developer
+        at Accenture
+        Brazil
+      </p>
+
+      <p class="text-[12px] overflow-hidden text-ellipsis text-slate-200/60 mt-1">
+        Fortaleza / CE
+      </p>
+    </div>
+  </div>
+</aside>

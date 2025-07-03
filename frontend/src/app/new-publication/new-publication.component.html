@@ -1,0 +1,41 @@
+<div class="flex w-full h-[100px] bg-zinc-900 rounded-xl py-2 px-4">
+  <div class="flex items-center gap-5 w-full">
+    <img class="border border-slate-200 rounded-full h-[60px] w-[60px]" src="{{avatar}}" alt="me">
+
+    <button (click)="this.openModalNewPublication()"
+      class="border border-zinc-500 py-4 text-zinc-400 bg-zinc-800 hover:border-zinc-300 rounded-full p-4 flex-1 text-left cursor-pointer transition-all duration-300"
+      placeholder="Crie uma nova publicação">
+      Crie uma nova publicação
+    </button>
+  </div>
+</div>
+
+<div [attr.data-open]="this.isOpenModalNewPublication()"
+  class="hidden data-[open=true]:flex justify-center flex-1 bg-black/20 w-full h-full fixed inset-0">
+  <div class="flex flex-col rounded-xl bg-zinc-800 mt-12 h-max w-[774px] gap-3">
+    <button (click)="this.closeModalNewPublication()" class="self-end cursor-pointer pt-4 pr-4">
+      <lucide-angular class="size-6 text-zinc-200 hover:text-zinc-200/80 duration-300 transition-all"
+        [img]="this.Close"></lucide-angular>
+    </button>
+
+    <div class="flex flex-col gap-4 px-4">
+      <textarea placeholder="Sobre o que você quer falar?"
+        class="resize-none text-zinc-200 placeholder:text-zinc-500 text-2xl outline-0" rows="12" name="publication"
+        id="publication"></textarea>
+
+      <div class="flex items-center justify-between">
+        <div class="flex gap-3 items-center">
+          <button class="cursor-pointer group">
+            <lucide-angular class="size-7 group-hover:scale-125 transition-all duration-300"
+              [img]="this.Image"></lucide-angular>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full border-t border-t-zinc-600 p-4 flex items-center gap-3 justify-end">
+      <button [disabled]="this.isDisabledButton" class=" self-end cursor-pointer disabled:pointer-events-none hover:bg-zinc-700/80 duration-300 transition-all border-0 rounded-full py-2
+        px-3 flex items-center justify-center bg-zinc-700">Publicar</button>
+    </div>
+  </div>
+</div>

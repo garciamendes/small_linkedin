@@ -3,5 +3,5 @@
 
 body,
 html {
-  @apply h-full w-full bg-gray-800 text-slate-200;
+  @apply h-full w-full bg-black text-slate-200;
 }

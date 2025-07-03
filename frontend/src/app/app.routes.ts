@@ -4,6 +4,7 @@ import { NotFoundComponent } from "./not-found/not-found.component";
 import { FeedComponent } from "./feed/feed.component";
 import { authGuard } from "./core/guards/auth.guard";
 import { RootLayoutComponent } from "./root-layout/root-layout.component";
+import { NetworkComponent } from "./network/network.component";
 
 export const routes: Routes = [
   {
@@ -23,6 +24,10 @@ export const routes: Routes = [
       {
         path: "feed",
         component: FeedComponent,
+      },
+      {
+        path: "network",
+        component: NetworkComponent,
       },
     ],
   },
