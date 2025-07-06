@@ -6,14 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { AuthService } from "../../core/services/auth.service";
 import { toast } from "ngx-sonner";
 import { Router } from "@angular/router";
-
-interface ILoginProps {
-  email: string;
-  password: string;
-}
+import { AuthService } from "../core/services/auth.service";
 
 @Component({
   selector: "app-auth",

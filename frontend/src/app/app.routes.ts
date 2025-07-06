@@ -1,10 +1,10 @@
 import { Routes } from "@angular/router";
-import { AuthComponent } from "./features/auth/auth.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { FeedComponent } from "./feed/feed.component";
 import { authGuard } from "./core/guards/auth.guard";
 import { RootLayoutComponent } from "./root-layout/root-layout.component";
 import { NetworkComponent } from "./network/network.component";
+import { AuthComponent } from "./auth/auth.component";
 
 export const routes: Routes = [
   {

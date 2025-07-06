@@ -15,26 +15,49 @@
   <div class="flex flex-col rounded-xl bg-zinc-800 mt-12 h-max w-[774px] gap-3">
     <button (click)="this.closeModalNewPublication()" class="self-end cursor-pointer pt-4 pr-4">
       <lucide-angular class="size-6 text-zinc-200 hover:text-zinc-200/80 duration-300 transition-all"
-        [img]="this.Close"></lucide-angular>
+        [img]="this.icons.Close"></lucide-angular>
     </button>
 
-    <div class="flex flex-col gap-4 px-4">
-      <textarea placeholder="Sobre o que você quer falar?"
-        class="resize-none text-zinc-200 placeholder:text-zinc-500 text-2xl outline-0" rows="12" name="publication"
-        id="publication"></textarea>
+    <div class="flex flex-col gap-6 px-4 max-h-[600px] overflow-auto">
+      <textarea placeholder="Sobre o que você quer falar?" [value]="this.publicationContent()"
+        (input)="this.publicationContent.set($any($event.target).value)"
+        class="shrink-0 resize-none text-zinc-200 placeholder:text-zinc-500 text-2xl outline-0 w-full" rows="12"
+        name="publication" id="publication"></textarea>
 
-      <div class="flex items-center justify-between">
-        <div class="flex gap-3 items-center">
-          <button class="cursor-pointer group">
-            <lucide-angular class="size-7 group-hover:scale-125 transition-all duration-300"
-              [img]="this.Image"></lucide-angular>
-          </button>
+      @if (this.fileLoading()) {
+      <div class="w-full flex flex-col items-center justify-center py-4 px-6 gap-2">
+        <div class="relative w-full h-3 bg-zinc-700 rounded-full overflow-hidden">
+          <div class="h-full bg-cyan-600 transition-all duration-200" [style.width.%]="this.fileProgress()"></div>
         </div>
+      </div>
+      }
+
+      @if (this.filePreview() && !this.fileLoading()) {
+      <div class="w-full flex flex-col gap-2.5">
+        <div class="flex justify-end gap-3">
+          <div
+            class="bg-slate-200 rounded-full p-1 text-zinc-800 cursor-pointer hover:bg-slate-200/80 transition-colors duration-300">
+            <lucide-angular (click)="this.handleClearFile()" [img]="this.icons.Close"></lucide-angular>
+          </div>
+        </div>
+
+        <img [src]="this.filePreview()" alt="File">
+      </div>
+      }
+    </div>
+
+    <div class="flex gap-4 px-4 items-center justify-between">
+      <input type="file" id='fileUpload' accept="image/*" hidden (change)="this.handleFileChange($event)">
+      <div class="flex gap-3 items-center">
+        <button class="cursor-pointer group" (click)="this.handleTriggerFile()">
+          <lucide-angular class="size-7 group-hover:scale-125 transition-all duration-300"
+            [img]="this.icons.Image"></lucide-angular>
+        </button>
       </div>
     </div>
 
     <div class="w-full border-t border-t-zinc-600 p-4 flex items-center gap-3 justify-end">
-      <button [disabled]="this.isDisabledButton" class=" self-end cursor-pointer disabled:pointer-events-none hover:bg-zinc-700/80 duration-300 transition-all border-0 rounded-full py-2
+      <button [disabled]="this.isDisabledButton()" (click)="this.handlerSubmit()" class="disabled:bg-zinc-700/70 self-end cursor-pointer disabled:pointer-events-none hover:bg-zinc-700/80 duration-300 transition-all border-0 rounded-full py-2
         px-3 flex items-center justify-center bg-zinc-700">Publicar</button>
     </div>
   </div>
